@@ -5,13 +5,18 @@
 			// make functionality goes here
 			var tags = ['a', 'div', 'span', 'form', 'h1', 'h2', 'h4'];
 			make = {};
-			for (var i = 0; i < tags.length; i++) {
+			tags.forEach(function(tag) {
+					make[tag] = function() {
+																		return document.createElement(tag)
+																}
+			});
+			/*for (var i = 0; i < tags.length; i++) {
 					(function (tag) {
 								make[tag] = function() {
 																						return document.createElement(tag)
 																				}
 						})(tags[i]);
-			}
+			}*/
 		</script>
 		<script type='text/javascript'>
 			var h1 = make.h1();
