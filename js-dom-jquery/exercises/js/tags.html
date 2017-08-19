@@ -3,7 +3,16 @@
 	<body>
 		<script type='text/javascript'>
 			// make functionality goes here
+			var locs = ['a', 'div', 'span', 'form', 'h1', 'h2', 'h4'];
 			make = {};
+			for (var i = 0; i <= locs.length; i++) {
+					make[locs[i]] = (function (j) {
+								return function()
+													  {
+																	return document.createElement(locs[j])
+															}
+						})(i);
+			}
 		</script>
 		<script type='text/javascript'>
 			var h1 = make.h1();
