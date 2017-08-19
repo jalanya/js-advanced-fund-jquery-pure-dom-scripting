@@ -14,9 +14,9 @@
 		var Person = function(name){
 			this.name = name;
 		}
-		
+
 		Person.prototype.species = 'Homo Sapien';
-		Person.prototype.speak =function(toWhom) { 
+		Person.prototype.speak =function(toWhom) {
 			return 'Hello ' + toWhom + '. My name is ' + this.name + '.';
 		}
 
@@ -25,7 +25,7 @@
 		test('DOT', function(){
 			var person = new Person('Alexis');
 			var species = DOT(person, 'species');
-
+			
 			equal(species, 'Homo Sapien', 'property accessed');
 
 		});
@@ -40,7 +40,7 @@
 
 		test('NEW', function(){
 			var person = NEW(Person, ['Alexis']);
-			
+
 			equal(person.name, 'Alexis', 'new function called');
 		});
 
