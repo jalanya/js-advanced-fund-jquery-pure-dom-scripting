@@ -3,15 +3,14 @@
 	<body>
 		<script type='text/javascript'>
 			// make functionality goes here
-			var locs = ['a', 'div', 'span', 'form', 'h1', 'h2', 'h4'];
+			var tags = ['a', 'div', 'span', 'form', 'h1', 'h2', 'h4'];
 			make = {};
-			for (var i = 0; i <= locs.length; i++) {
-					make[locs[i]] = (function (j) {
-								return function()
-													  {
-																	return document.createElement(locs[j])
-															}
-						})(i);
+			for (var i = 0; i < tags.length; i++) {
+					(function (tag) {
+								make[tag] = function() {
+																						return document.createElement(tag)
+																				}
+						})(tags[i]);
 			}
 		</script>
 		<script type='text/javascript'>
