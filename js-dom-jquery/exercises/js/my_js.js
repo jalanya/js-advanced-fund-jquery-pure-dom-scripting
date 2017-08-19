@@ -9,7 +9,10 @@ DOT = function(obj, prop){
 
 // 05 Context
 DOTCALL = function(obj, prop, args){
-  return DOT(obj, prop).apply(obj, args);
+  var fn = DOT(obj, prop);
+  if (fn) {
+   return fn.apply(obj, args);
+  }
 }
 
 // 06 Prototypes
