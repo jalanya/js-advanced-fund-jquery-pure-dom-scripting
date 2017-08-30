@@ -17,11 +17,20 @@ DOTCALL = function(obj, prop, args){
 
 // 06 Prototypes
 NEW = function(constructor, args){
-  function F() {
+  /*function F() {
     constructor.apply(this, args);
   }
   F.prototype = new constructor;
   return new F();
+  */
+  //create a new object
+  //set new object's __proto__ to constructor's prototype
+  //invoke our constructor with our new object as context
+  //return our new object
+  var o = {};
+  o.__proto__ = constructor.prototype;
+  constructor.apply(o, args);
+  return o;
 }
 
 INSTANCEOF = function(obj, constructor){
