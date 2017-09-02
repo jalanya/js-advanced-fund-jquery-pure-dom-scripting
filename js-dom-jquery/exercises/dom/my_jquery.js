@@ -1,9 +1,9 @@
 (function() {
   $ = function(selector) {};
-  
+
   $.extend = function(target, object) {
     for (var prop in object) {
-      if (!target.hasOwnProperty(prop)) {
+      if (object.hasOwnProperty(prop)) {
         target[prop] = object[prop];
       }
     }
