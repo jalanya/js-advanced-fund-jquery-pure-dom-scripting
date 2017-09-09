@@ -26,7 +26,18 @@
     isArray: function(obj) {
      return Object.prototype.toString.call(obj) === '[object Array]'
     },
-    each: function(collection, cb) {},
+    each: function(collection, cb) {
+      if (isArrayLike(collection)) {
+        for (var i = 0; i < collection.length; i++) {
+         cb(i, collection[i]);
+        }
+      } else {
+        for (var prop in collection) {
+         cb(prop, collection[prop]);
+        }
+      }
+      return collection;
+    },
     makeArray: function(arr) {},
     proxy: function(fn, context) {}
   });
