@@ -29,11 +29,13 @@
     each: function(collection, cb) {
       if (isArrayLike(collection)) {
         for (var i = 0; i < collection.length; i++) {
-         cb(i, collection[i]);
+         var value = collection[i];
+         cb.call(value, i, value);
         }
       } else {
         for (var prop in collection) {
-         cb(prop, collection[prop]);
+         var value = collection[prop];
+         cb.call(value, prop, value);
         }
       }
       return collection;
