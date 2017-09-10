@@ -41,11 +41,11 @@
       return collection;
     },
     makeArray: function(arr) {
-     var result = [];
-     $.each(arr, function(index, value){
+     var array = [];
+     $.each(arr, function(i, value){
        result.push(value);
      });
-     return result;
+     return array;
     },
     proxy: function(fn, context) {}
   });
