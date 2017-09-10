@@ -47,7 +47,11 @@
      });
      return array;
     },
-    proxy: function(fn, context) {}
+    proxy: function(fn, context) {
+     return function() {
+      return fn.apply(context, arguments);
+     }
+    }
   });
 
   $.extend($.prototype, {
