@@ -43,7 +43,7 @@
     makeArray: function(arr) {
      var array = [];
      $.each(arr, function(i, value){
-       result.push(value);
+       array.push(value);
      });
      return array;
     },
