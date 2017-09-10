@@ -40,7 +40,13 @@
       }
       return collection;
     },
-    makeArray: function(arr) {},
+    makeArray: function(arr) {
+     var result = [];
+     $.each(arr, function(index, value){
+       result.push(value);
+     });
+     return result;
+    },
     proxy: function(fn, context) {}
   });
 
