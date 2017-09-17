@@ -1,5 +1,11 @@
 (function() {
-  $ = function(selector) {};
+  $ = function(selector) {
+    var elements = document.querySelectorAll(selector);
+    for (var i = 0; i < elements.length; i++) {
+      this[i] = elements[i];
+    }
+    this.length = elements.length;
+  };
 
   $.extend = function(target, object) {
     for (var prop in object) {

@@ -23,3 +23,9 @@ Object.prototype.toString.call(Infinity)
 ```
 You can take a look at more details [here](https://gist.github.com/pbakondy/f442e91995e9d206c056)
 and [this](http://luxiyalu.com/object-prototype-tostring-call/)
+
+
+##### Array push
+
+* `Array.prototype.push.apply(this, elements);`
+* `[].push.apply(this, elements)`
