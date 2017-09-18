@@ -63,9 +63,10 @@
   $.extend($.prototype, {
     html: function(newHtml) {
       if (arguments.length) {
-        return $.each(this, function(i, value) {
-          this.innerHTML = newHtml;
+        $.each(this, function(i, el) {
+          el.innerHTML = newHtml;
         });
+        return this;
       } else {
         return this[0].innerHTML;
       }
