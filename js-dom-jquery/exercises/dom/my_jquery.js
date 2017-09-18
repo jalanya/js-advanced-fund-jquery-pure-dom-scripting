@@ -71,7 +71,16 @@
         return this[0].innerHTML;
       }
     },
-    val: function(newVal) {},
+    val: function(newVal) {
+      if (arguments.length) {
+        $.each(this, function(i, el) {
+          el.value = newVal;
+        });
+        return this;
+      } else {
+        return this[0].value;
+      }
+    },
     text: function(newText) {},
     find: function(selector) {},
     next: function() {},
