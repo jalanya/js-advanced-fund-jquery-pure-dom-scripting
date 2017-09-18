@@ -29,3 +29,9 @@ and [this](http://luxiyalu.com/object-prototype-tostring-call/)
 
 * `Array.prototype.push.apply(this, elements);`
 * `[].push.apply(this, elements)`
+
+#### jQuery's chaining
+
+* [Ultra-Chaining with jQuery](https://johnresig.com/blog/ultra-chaining-with-jquery/)
+* [.end()](https://api.jquery.com/end/)
+* [Chaining in jQuery](http://jsfiddle.net/5kkCh/)
