@@ -1,6 +1,6 @@
 (function() {
   $ = function(selector) {
-    if (Object.prototype.toString.call(this) === '[object Window]') {
+    if (!(this instanceof $)) {
       return new $(selector);
     }
 
