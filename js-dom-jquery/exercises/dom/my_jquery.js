@@ -1,5 +1,9 @@
 (function() {
   $ = function(selector) {
+    if (Object.prototype.toString.call(this) === '[object Window]') {
+      return new $(selector);
+    }
+
     var elements = document.querySelectorAll(selector);
     for (var i = 0; i < elements.length; i++) {
       this[i] = elements[i];
