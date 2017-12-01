@@ -85,7 +85,25 @@
         return this[0].value;
       }
     },
-    text: function(newText) {},
+    text: function(newText) {
+      if (arguments.length) {
+        $.each(this, function(i, el) {
+          el.innerHTML = '';
+          var textNode = document.createTextNode(newText);
+          el.appendChild(textNode);
+        });
+      } else {
+        var newText = '';
+        $.each(this, function(i, el) {
+          if (el.nodeType === 3) {
+            newText += el.nodeValue;
+          } else {
+            newText += $.prototype.text.apply(el.childNodes);
+          }
+        });
+        return newText;
+      }
+    },
     find: function(selector) {},
     next: function() {},
     prev: function() {},
