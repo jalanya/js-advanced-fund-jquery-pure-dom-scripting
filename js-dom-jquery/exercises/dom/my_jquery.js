@@ -4,7 +4,13 @@
       return new $(selector);
     }
 
-    var elements = document.querySelectorAll(selector);
+    var elements;
+    if (Object.prototype.toString.call(selector) === '[object String]') {
+      elements = document.querySelectorAll(selector);
+    } else {
+      elements = selector;
+    }
+
     for (var i = 0; i < elements.length; i++) {
       this[i] = elements[i];
     }
@@ -114,7 +120,14 @@
         return this[0] && getText(this[0]);
       }
     },
-    find: function(selector) {},
+    find: function(selector) {
+      var elements = [];
+      $.each(this, function(i, el) {
+        var childElements = el.querySelectorAll(selector);
+        [].push.apply(elements, childElements);
+      });
+      return $(elements);
+    },
     next: function() {},
     prev: function() {},
     parent: function() {},
