@@ -5,7 +5,7 @@
     }
 
     var elements;
-    if (Object.prototype.toString.call(selector) === '[object String]') {
+    if (typeof selector === 'string') {
       elements = document.querySelectorAll(selector);
     } else {
       elements = selector;
@@ -123,8 +123,8 @@
     find: function(selector) {
       var elements = [];
       $.each(this, function(i, el) {
-        var childElements = el.querySelectorAll(selector);
-        [].push.apply(elements, childElements);
+        var els = el.querySelectorAll(selector);
+        [].push.apply(elements, els);
       });
       return $(elements);
     },
