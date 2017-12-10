@@ -64,6 +64,18 @@
     }
   });
 
+  var getText = function (el) {
+    var txt = "";
+    $.each(el.childNodes, function(i, childNode) {
+      if (childNode.nodeType === Node.TEXT_NODE) {
+        txt += childNode.nodeValue;
+      } else if (childNode.nodeType === Node.ELEMENT_NODE){
+        txt += getText(childNode);
+      }
+    });
+    return txt;
+  };
+
   $.extend($.prototype, {
     html: function(newHtml) {
       if (arguments.length) {
@@ -87,21 +99,19 @@
     },
     text: function(newText) {
       if (arguments.length) {
+        // setter
+        // loop and ...
+        this.html("");
         $.each(this, function(i, el) {
-          el.innerHTML = '';
+          // set innerHTML to ""
+          //el.innerHTML = ''; This is fine. However, it would be better if this outside the iteration.
+          // document.createTextNode with newText
           var textNode = document.createTextNode(newText);
+          // and append to the element.
           el.appendChild(textNode);
         });
       } else {
-        var newText = '';
-        $.each(this, function(i, el) {
-          if (el.nodeType === 3) {
-            newText += el.nodeValue;
-          } else {
-            newText += $.prototype.text.apply(el.childNodes);
-          }
-        });
-        return newText;
+        return this[0] && getText(this[0]);
       }
     },
     find: function(selector) {},
