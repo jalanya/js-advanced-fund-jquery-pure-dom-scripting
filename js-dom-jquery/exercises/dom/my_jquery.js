@@ -82,6 +82,18 @@
     return txt;
   };
 
+  var getNextElement = function(el) {
+    var els = [];
+    var nextEl = el.nextSibling;
+    while (nextEl && nextEl.nodeType === Node.TEXT_NODE) {
+      nextEl = nextEl.nextSibling;
+    }
+    if (nextEl !== null) {
+      els.push(nextEl);
+    }
+    return els;
+  };
+
   $.extend($.prototype, {
     html: function(newHtml) {
       if (arguments.length) {
@@ -128,7 +140,19 @@
       });
       return $(elements);
     },
-    next: function() {},
+    next: function() {
+      var elements = [];
+      $.each(this, function(i, el) {
+        if (el.nextSibling && el.nextSibling.nodeType !== Node.TEXT_NODE) {
+          elements.push(el.nextSibling);
+        }
+        else if (el.nextSibling !== null) {
+          var els = getNextElement(el);
+          [].push.apply(elements, els);
+        }
+      });
+      return $(elements);
+    },
     prev: function() {},
     parent: function() {},
     children: function() {},
