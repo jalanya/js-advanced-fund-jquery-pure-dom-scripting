@@ -81,19 +81,7 @@
     });
     return txt;
   };
-
-  var getNextElement = function(el) {
-    var els = [];
-    var nextEl = el.nextSibling;
-    while (nextEl && nextEl.nodeType === Node.TEXT_NODE) {
-      nextEl = nextEl.nextSibling;
-    }
-    if (nextEl !== null) {
-      els.push(nextEl);
-    }
-    return els;
-  };
-
+  
   $.extend($.prototype, {
     html: function(newHtml) {
       if (arguments.length) {
@@ -143,12 +131,12 @@
     next: function() {
       var elements = [];
       $.each(this, function(i, el) {
-        if (el.nextSibling && el.nextSibling.nodeType !== Node.TEXT_NODE) {
-          elements.push(el.nextSibling);
+        var current = el.nextSibling;
+        while (current && current.nodeType !== Node.ELEMENT_NODE) {
+          current = current.nextSibling;
         }
-        else if (el.nextSibling !== null) {
-          var els = getNextElement(el);
-          [].push.apply(elements, els);
+        if (current) {
+          elements.push(current);
         }
       });
       return $(elements);
