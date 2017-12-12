@@ -81,7 +81,7 @@
     });
     return txt;
   };
-  
+
   $.extend($.prototype, {
     html: function(newHtml) {
       if (arguments.length) {
@@ -141,9 +141,33 @@
       });
       return $(elements);
     },
-    prev: function() {},
-    parent: function() {},
-    children: function() {},
+    prev: function() {
+      var elements = [];
+      $.each(this, function(i, el) {
+        var current = el.previousSibling;
+        while (current && current.nodeType !== Node.ELEMENT_NODE) {
+          current = current.previousSibling;
+        }
+        if (current) {
+          elements.push(current);
+        }
+      });
+      return $(elements);
+    },
+    parent: function() {
+      var elements = [];
+      $.each(this, function(i, el) {
+        elements.push(el.parentNode);
+      });
+      return $(elements);
+    },
+    children: function() {
+      var elements = [];
+      $.each(this, function(i, el) {
+        [].push.apply(elements, el.children);
+      });
+      return $(elements);
+    },
     attr: function(attrName, value) {},
     css: function(cssPropName, value) {},
     width: function() {},
