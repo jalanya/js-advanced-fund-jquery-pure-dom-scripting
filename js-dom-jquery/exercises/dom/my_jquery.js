@@ -84,10 +84,11 @@
 
   var makeTraverser = function(cb) {
     return function() {
-      var elements = [];
-      var parameter = arguments[0];
+      var elements = [],
+      args = arguments;
+
       $.each(this, function(i, el) {
-        var els = cb.call(el, parameter);
+        var els = cb.apply(el, args);
         if (els && isArrayLike(els)) {
           [].push.apply(elements, els);
         } else if (els) {
