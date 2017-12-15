@@ -169,7 +169,17 @@
         return this[0] && this[0].getAttribute(attrName);
       }
     },
-    css: function(cssPropName, value) {},
+    css: function(cssPropName, value) {
+      if (arguments.length > 1) {
+        return $.each(this, function(i, el) {
+          el.style[cssPropName] = value;
+        });
+      } else {
+        return this[0] &&
+          document.defaultView.getComputedStyle(this[0])
+          .getPropertyValue(cssPropName);
+      }
+    },
     width: function() {},
     offset: function() {
       var offset = this[0].getBoundingClientRect();
