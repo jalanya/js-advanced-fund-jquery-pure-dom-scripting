@@ -194,8 +194,12 @@
         left: offset.left + window.pageXOffset
       };
     },
-    hide: function() {},
-    show: function() {},
+    hide: function() {
+      return this.css("display", "none");
+    },
+    show: function() {
+      return this.css("display", "");
+    },
 
     // Events
     bind: function(eventName, handler) {},
