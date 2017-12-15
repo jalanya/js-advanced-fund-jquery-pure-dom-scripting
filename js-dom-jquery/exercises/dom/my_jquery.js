@@ -160,7 +160,15 @@
     children: makeTraverser(function() {
       return this.children;
     }),
-    attr: function(attrName, value) {},
+    attr: function(attrName, value) {
+      if (arguments.length > 1) {
+        return $.each(this, function(i, el) {
+          el.setAttribute(attrName, value);
+        });
+      } else {
+        return this[0] && this[0].getAttribute(attrName);
+      }
+    },
     css: function(cssPropName, value) {},
     width: function() {},
     offset: function() {
