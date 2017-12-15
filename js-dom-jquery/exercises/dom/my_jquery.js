@@ -180,7 +180,13 @@
           .getPropertyValue(cssPropName);
       }
     },
-    width: function() {},
+    width: function() {
+      var clientWidth = this[0].clientWidth;
+      var leftPadding = this.css("padding-left"),
+          rightPadding = this.css("padding-right");
+      return clientWidth - parseInt(leftPadding)
+        - parseInt(rightPadding);
+    },
     offset: function() {
       var offset = this[0].getBoundingClientRect();
       return {
