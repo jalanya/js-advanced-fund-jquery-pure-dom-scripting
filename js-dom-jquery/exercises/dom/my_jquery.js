@@ -67,7 +67,7 @@
      return function() {
       return fn.apply(context, arguments);
      }
-    }
+    },
   });
 
   var getText = function (el) {
@@ -80,6 +80,22 @@
       }
     });
     return txt;
+  };
+
+  var makeTraverser = function(cb) {
+    return function() {
+      var elements = [];
+      var parameter = arguments[0];
+      $.each(this, function(i, el) {
+        var els = cb.call(el, parameter);
+        if (els && isArrayLike(els)) {
+          [].push.apply(elements, els);
+        } else if (els) {
+          elements.push(els);
+        }
+      });
+      return $(elements);
+    }
   };
 
   $.extend($.prototype, {
@@ -120,54 +136,29 @@
         return this[0] && getText(this[0]);
       }
     },
-    find: function(selector) {
-      var elements = [];
-      $.each(this, function(i, el) {
-        var els = el.querySelectorAll(selector);
-        [].push.apply(elements, els);
-      });
-      return $(elements);
-    },
-    next: function() {
-      var elements = [];
-      $.each(this, function(i, el) {
-        var current = el.nextSibling;
-        while (current && current.nodeType !== Node.ELEMENT_NODE) {
-          current = current.nextSibling;
-        }
-        if (current) {
-          elements.push(current);
-        }
-      });
-      return $(elements);
-    },
-    prev: function() {
-      var elements = [];
-      $.each(this, function(i, el) {
-        var current = el.previousSibling;
-        while (current && current.nodeType !== Node.ELEMENT_NODE) {
-          current = current.previousSibling;
-        }
-        if (current) {
-          elements.push(current);
-        }
-      });
-      return $(elements);
-    },
-    parent: function() {
-      var elements = [];
-      $.each(this, function(i, el) {
-        elements.push(el.parentNode);
-      });
-      return $(elements);
-    },
-    children: function() {
-      var elements = [];
-      $.each(this, function(i, el) {
-        [].push.apply(elements, el.children);
-      });
-      return $(elements);
-    },
+    find: makeTraverser(function(selector) {
+      return this.querySelectorAll(selector)
+    }),
+    next: makeTraverser(function() {
+      var current = this.nextSibling;
+      while (current && current.nodeType !== Node.ELEMENT_NODE) {
+        current = current.nextSibling;
+      }
+      return current;
+    }),
+    prev: makeTraverser(function() {
+      var current = this.previousSibling;
+      while (current && current.nodeType !== Node.ELEMENT_NODE) {
+        current = current.previousSibling;
+      }
+      return current;
+    }),
+    parent: makeTraverser(function() {
+      return this.parentNode;
+    }),
+    children: makeTraverser(function() {
+      return this.children;
+    }),
     attr: function(attrName, value) {},
     css: function(cssPropName, value) {},
     width: function() {},

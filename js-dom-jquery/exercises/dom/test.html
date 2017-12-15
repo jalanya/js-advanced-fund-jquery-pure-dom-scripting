@@ -173,7 +173,7 @@
 
 		test('$.fn.children', function(){
 			var $ul = $('#qunit-fixture')
-				.html('<ul><li/><li/></ul><ul><li/><li/></ul>')
+				.html('<ul id="ul1"><li id="ul1-li1"/><li id="ul1-li2"/></ul><ul id="ul2"><li id="ul2-li1"/><li id="ul2-li2"/></ul>')
 				.children();
 
 			equal($ul.length, 2, 'got 2 uls');
